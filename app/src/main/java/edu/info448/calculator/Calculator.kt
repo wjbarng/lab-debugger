@@ -49,7 +49,7 @@ class Calculator {
      * Multiply operation
      */
     fun mul(operand: Double): Double {
-        value /= operand
+        value *= operand
         return value
     }
 }

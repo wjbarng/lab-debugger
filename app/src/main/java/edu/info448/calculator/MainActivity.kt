@@ -8,7 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
-class MainActivity : Activity() {
+class
+MainActivity : Activity() {
 
     private var mCalculator: Calculator? = null
 
@@ -39,7 +40,7 @@ class MainActivity : Activity() {
         val divButton = findViewById(R.id.operation_div_btn) as Button
         divButton.setOnClickListener {
             try {
-                compute(Calculator.Operator.MUL)
+                compute(Calculator.Operator.DIV)
             } catch (iae: IllegalArgumentException) {
                 Log.e(TAG, "IllegalArgumentException", iae)
                 mResultTextView!!.text = getString(R.string.computationError)
@@ -50,7 +51,8 @@ class MainActivity : Activity() {
         mulButton.setOnClickListener { compute(Calculator.Operator.MUL) }
 
         val resetButton = findViewById(R.id.reset_btn) as Button
-        resetButton.setOnClickListener { mResultTextView!!.setText(R.string.initial_result_text) }
+        resetButton.setOnClickListener { mResultTextView!!.setText(R.string.initial_result_text)
+                                            mCalculator!!.setValue(0.0)}
     }
 
 
@@ -67,7 +69,7 @@ class MainActivity : Activity() {
         val result: String
         when (operator) {
             Calculator.Operator.ADD -> result = mCalculator!!.add(operand).toString()
-            Calculator.Operator.SUB -> result = getString(R.string.computationError)
+            Calculator.Operator.SUB -> result = mCalculator!!.sub(operand).toString()
             Calculator.Operator.DIV -> result = mCalculator!!.div(operand).toString()
             Calculator.Operator.MUL -> result = mCalculator!!.mul(operand).toString()
             else -> result = getString(R.string.computationError)
